@@ -1,0 +1,1 @@
+export default function DashboardPage() { return (<main className='p-8 bg-slate-950 text-white min-h-screen'><h1>Parent & Learner Dashboard</h1></main>); }

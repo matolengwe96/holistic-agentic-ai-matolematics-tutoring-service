@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: matolematics-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: matolematics_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./services/src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  agents:
+    build: ./agents
+    container_name: matolematics-agents
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - postgres
+
+  services:
+    build: ./services
+    container_name: matolematics-express
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - AGENT_SERVICE_URL=http://agents:8000
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/matolematics_db
+    depends_on:
+      - postgres
+      - agents
+
+  web:
+    build: ./web
+    container_name: matolematics-next
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000
+    depends_on:
+      - services
+
+volumes:
+  postgres_data:

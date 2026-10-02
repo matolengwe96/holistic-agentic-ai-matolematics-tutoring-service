@@ -1,0 +1,1 @@
+export default function Scratchpad() { return <div className='border border-slate-800 p-4 rounded'>Digital Canvas</div>; }

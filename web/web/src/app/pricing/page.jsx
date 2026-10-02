@@ -1,0 +1,1 @@
+export default function PricingPage() { return (<main className='p-8 bg-slate-950 text-white min-h-screen'><h1>Transparent Pricing & Micro-Grants</h1></main>); }

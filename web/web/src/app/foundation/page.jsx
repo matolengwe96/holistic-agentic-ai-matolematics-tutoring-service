@@ -1,0 +1,1 @@
+export default function FoundationPage() { return (<main className='p-8 bg-slate-950 text-white min-h-screen'><h1>Foundation & Sponsor Impact Portal</h1></main>); }

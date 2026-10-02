@@ -1,0 +1,1 @@
+export default function AboutPage() { return (<main className='p-8 bg-slate-950 text-white min-h-screen'><h1>About Matolematics & Socratic Pedagogy</h1></main>); }

@@ -1,0 +1,1 @@
+export default function MathRenderer({ content }) { return <div>{content}</div>; }
